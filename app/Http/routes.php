@@ -27,3 +27,9 @@ Route::controllers([
 
 
 //Route::get('')
+
+
+
+// api requests
+
+Route:get('/api/score','APIController@getScore');
