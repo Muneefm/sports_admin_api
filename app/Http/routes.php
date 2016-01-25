@@ -18,6 +18,18 @@ Route::post('/login', 'AdminController@login');
 Route::get('/signup', 'AdminController@createUser');
 Route::get('/logout','AdminController@logout');
 
+Route::get('/group_blue','AdminController@getBlue');
+Route::post('/add_blue','AdminController@getBlue');
+
+Route::get('/group_green','AdminController@getGreen');
+Route::post('/add_green','AdminController@getGreen');
+
+Route::get('/group_yellow','AdminController@getYellow');
+Route::post('/add_yellow','AdminController@getYellow');
+
+Route::get('/group_red','AdminController@getRed');
+Route::post('/add_red','AdminController@getRed');
+
 //Route::get('home', 'HomeController@index');
 
 Route::controllers([

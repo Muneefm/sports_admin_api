@@ -1,4 +1,10 @@
 <?php namespace App\Http\Controllers;
+use App\Blueg;
+use App\Greeng;
+use App\Redg;
+use App\Yellowg;
+
+
 use App\User;
 use App\Score;
 use Auth;
@@ -94,6 +100,85 @@ class AdminController extends Controller
             return redirect('login');
         }
         }
+
+
+    function getBlue(){
+        if (Auth::check()) {
+            $name = Input::get("name");
+            $year = Input::get("year");
+            $class = Input::get("class");
+            if($name!=null&&$year!=null&&$class!=null){
+            $blue_member = new Blueg();
+                $blue_member->name = $name;
+                $blue_member->year = $year;
+                $blue_member->class = $class;
+                $blue_member->save();
+            }
+            return view('admin.groups.blue');
+        }else{
+            return redirect('login');
+
+        }
+    }
+
+    function getGreen(){
+        if (Auth::check()) {
+            $name = Input::get("name");
+            $year = Input::get("year");
+            $class = Input::get("class");
+            if($name!=null&&$year!=null&&$class!=null){
+                $blue_member = new Greeng();
+                $blue_member->name = $name;
+                $blue_member->year = $year;
+                $blue_member->class = $class;
+                $blue_member->save();
+            }
+            return view('admin.groups.green');
+        }else{
+            return redirect('login');
+
+        }
+    }
+
+
+    function getYellow(){
+        if (Auth::check()) {
+            $name = Input::get("name");
+            $year = Input::get("year");
+            $class = Input::get("class");
+            if($name!=null&&$year!=null&&$class!=null){
+                $blue_member = new Yellowg();
+                $blue_member->name = $name;
+                $blue_member->year = $year;
+                $blue_member->class = $class;
+                $blue_member->save();
+            }
+            return view('admin.groups.yellow');
+        }else{
+            return redirect('login');
+
+        }
+    }
+
+    function getRed(){
+        if (Auth::check()) {
+            $name = Input::get("name");
+            $year = Input::get("year");
+            $class = Input::get("class");
+            if($name!=null&&$year!=null&&$class!=null){
+                $blue_member = new Redg();
+                $blue_member->name = $name;
+                $blue_member->year = $year;
+                $blue_member->class = $class;
+                $blue_member->save();
+            }
+            return view('admin.groups.red');
+        }else{
+            return redirect('login');
+
+        }
+    }
+
 
 
 }
