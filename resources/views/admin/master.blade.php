@@ -309,6 +309,23 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+
+
+
+                           <li>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Events<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                            <?php  $event_table = \Illuminate\Support\Facades\DB::table('eventname')->get();   ?>
+                            @foreach($event_table as $item)
+                                <li>
+                                    <a href="{{url('/event?ev='.$item->code)}}">{{$item->name}}</a>
+                                </li>
+                             @endforeach
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+
+
                         <li>
                             <a href="tables.html"><i class="fa fa-table fa-fw"></i> Tables</a>
                         </li>
