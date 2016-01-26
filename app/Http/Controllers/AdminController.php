@@ -17,6 +17,18 @@ use Illuminate\Support\Facades\Hash;
 class AdminController extends Controller
 {
 
+    function eventpop(){
+
+        $evname = array("100m Race Boys","100m Race Girls","110m Hurdles Boys","200m Race Boys","200m Race Girls","200m Hurdles Boys","400m Race Boys","400m Race Girls","800m Race Boys","800m Race Girls","1500m Race Boys","3000m Race Boys","3km Walking Boys","1km Walking Girls","2km Walking Girls","Shotput Boys","Shotput Girls","Discus throw Boys","Discus throw Girls","Javelin throw Boys","Javelin throw Girls","Hammer throw Boys","Hammer throw Girls","Broad Jump Boys","Broad Jump Girls","Triple Jump Boys","Triple Jump Boys");
+        $evcode=  array("e1",            "e2",             "e3",               "e4",            "e5",             "e6",               "e7",            "e8",             "e9",            "e10",            "e11",            "e12",             "e13",            "e14",              "e15",              "e16",         "e17",          "e18",              "e19",               "e20",               "e21",                "e22",              "e23",               "e24",            "e25",             "e26",            "e27");
+       //  $evtype = array("i",             "i",  );
+
+
+
+    }
+
+
+
     function createUser(){
         $user = new User();
         $user->name = 'mnf';
@@ -178,6 +190,11 @@ class AdminController extends Controller
 
         }
     }
+
+
+
+
+
 
 
 

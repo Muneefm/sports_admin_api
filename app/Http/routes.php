@@ -11,6 +11,11 @@
 |
 */
 
+Route::get('/populate_event_list','AdminController@eventpop');
+
+
+
+
 Route::get('/home', 'AdminController@home');
 Route::post('/home', 'AdminController@home');
 Route::get('/login', 'AdminController@loginPage');
