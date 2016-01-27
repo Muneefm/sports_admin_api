@@ -18,6 +18,7 @@ class CreateEventNameTable extends Migration {
             $table->string('name');
             $table->string('code')->unique();
             $table->string('type');
+            $table->string('specialtype');
             //  $table->string('y');
             $table->timestamps();
         });

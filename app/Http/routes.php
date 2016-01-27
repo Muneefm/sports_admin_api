@@ -34,8 +34,14 @@ Route::post('/add_yellow','AdminController@getYellow');
 
 Route::get('/group_red','AdminController@getRed');
 Route::post('/add_red','AdminController@getRed');
+
+//events
 Route::get('/event','AdminController@getEvent');
 Route::post('/add_event_list','AdminController@getEvent');
+
+//events
+Route::get('/winners','AdminController@getWinners');
+Route::post('/add_winners','AdminController@getWinners');
 
 
 
