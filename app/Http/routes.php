@@ -43,9 +43,24 @@ Route::post('/add_event_list','AdminController@getEvent');
 Route::get('/winners','AdminController@getWinners');
 Route::post('/add_winners','AdminController@getWinners');
 
+//image Upload
+Route::get('/up_image','AdminController@imageUpload');
+Route::post('/up_image','AdminController@imageUpload');
+
+Route::get('/gallery','AdminController@openGallery');
+
+Route::get('/parse_excel','AdminController@excelView');
+Route::post('/parse_excel','AdminController@excelParse');
+
 
 
 //Route::get('home', 'HomeController@index');
+// DETE ROUTES
+
+Route::get('/del_group','DeleteController@deleteFromGroup');
+Route::get('/del_eventlist','DeleteController@deleteFromEvent');
+Route::get('/del_winner','DeleteController@deleteFromWinners');
+
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',

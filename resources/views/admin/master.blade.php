@@ -35,6 +35,9 @@
     <!-- Custom Fonts -->
     <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+
+
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -420,17 +423,16 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="blank.html">Blank Page</a>
-                                </li>
-                                <li>
-                                    <a href="login.html">Login Page</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
+                      <a href="{{url('/up_image')}}"><i class="fa fa-dashboard fa-fw"></i> ImageUpload</a>
+                      </li>
+
+
+                        <li>
+                        <a href="{{url('/gallery')}}"><i class="fa fa-dashboard fa-fw"></i> Gallery</a>
+                         </li>
+                          <li>
+                          <a href="{{url('/parse_excel')}}"><i class="fa fa-dashboard fa-fw"></i> Group Excel Parse</a>
+                          </li>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->

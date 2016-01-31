@@ -3,7 +3,6 @@
 
 @section('content')
 
-<?php echo "test" ?>
 
 <div id="page-wrapper">
             <div class="row">

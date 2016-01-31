@@ -37,6 +37,7 @@ $eventListTable = \Illuminate\Support\Facades\DB::table('event')->where('event',
                                             <th>Year</th>
                                             <th>Class</th>
                                              <th>Event</th>
+                                             <th>Delete</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -48,6 +49,7 @@ $eventListTable = \Illuminate\Support\Facades\DB::table('event')->where('event',
                                             <td>{{$listItem->year}}</td>
                                             <td>{{$listItem->class}}</td>
                                            <td>{{$listItem->event}}</td>
+                                           <td><a  href="{{url('/del_eventlist?ev_id='.$listItem->id)}}" onclick="return confirm('Do you really want to Delete this?');" class="btn btn-danger btn-sm">Delete </a></td>
 
 
                                         </tr>

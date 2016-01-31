@@ -3,6 +3,7 @@ use App\Blueg;
 use App\Event;
 use App\Eventname;
 use App\Greeng;
+use App\Images;
 use App\Redg;
 use App\Winners;
 use App\Yellowg;
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 class AdminController extends Controller
@@ -209,7 +211,9 @@ class AdminController extends Controller
 
 
     function getEvent(){
-        $eventId = Input::get('ev');
+        if (Auth::check()) {
+
+            $eventId = Input::get('ev');
 
         $evName = Input::get('name');
         $evGroup = Input::get('group');
@@ -229,13 +233,18 @@ class AdminController extends Controller
 
             return view('admin.EventList')->with('eventNameTable',$eventNameTable);
         }
+        }else{
+            return redirect('login');
 
+        }
     }
 
 
 
     function getWinners(){
-        $eventId = Input::get('ev');
+        if (Auth::check()) {
+
+            $eventId = Input::get('ev');
 
         $evPos = Input::get('pos');
          $evName = Input::get('name');
@@ -259,13 +268,109 @@ class AdminController extends Controller
 
             return view('admin.WinnersList')->with('eventNameTable',$eventNameTable);
         }
+        }else{
+            return redirect('login');
 
+        }
 
     }
 
 
 
 
+
+    function imageUpload()
+    {
+        if (Auth::check()) {
+
+            if (Input::hasFile('img')) {
+        $imageFile = Input::file('img');
+            $filename = time().'.'.$imageFile->getClientOriginalExtension();
+            $imageModel = new Images();
+            $imageModel->name = $filename;
+            $imageModel->ext = $imageFile->getClientOriginalExtension();
+            $imageModel->save();
+            $imageFile->move('uploads',$filename);
+    }
+        return view('admin.ImageUpload');
+        }else{
+            return redirect('login');
+
+        }
+    }
+
+function openGallery(){
+    if (Auth::check()) {
+    return view('admin.Gallery');
+    }else{
+        return redirect('login');
+    }
+
+}
+
+    function excelView(){
+        if (Auth::check()) {
+            return view('admin.ExcelParse');
+        }else{
+            return redirect('login');
+        }
+    }
+
+function excelParse()
+{
+    if (Auth::check()) {
+
+        $class = Input::get('class');
+    $year = Input::get('year');
+
+    if (Input::hasFile('exl')) {
+        $exlFile = Input::file('exl');
+        $result = Excel::load($exlFile)->get();
+        //  dd($result->toArray());
+         if ($class != null && $year != null && $result != null) {
+
+         foreach ($result as $res) {
+             if ($res->blue != null) {
+                 $blueModel = new Blueg();
+                 $blueModel->name = $res->blue;
+                 $blueModel->class = $class;
+                 $blueModel->year = $year;
+                 $blueModel->save();
+             }
+             if ($res->green != null) {
+                 $greenModel = new Greeng();
+                 $greenModel->name = $res->green;
+                 $greenModel->class = $class;
+                 $greenModel->year = $year;
+                 $greenModel->save();
+             }
+             if ($res->yellow != null) {
+                 $yellowModel = new Yellowg();
+                 $yellowModel->name = $res->yellow;
+                 $yellowModel->class = $class;
+                 $yellowModel->year = $year;
+                 $yellowModel->save();
+             }
+             if ($res->red != null) {
+                 $redModel = new Redg();
+                 $redModel->name = $res->red;
+                 $redModel->class = $class;
+                 $redModel->year = $year;
+                 $redModel->save();
+             }
+
+         }
+     }
+
+        return Redirect('group_blue');
+
+    }else{
+echo 'Failed ';
+    }
+    }else{
+        return redirect('login');
+    }
+}
 
 
 }

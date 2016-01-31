@@ -35,10 +35,10 @@ $winnersListTable = \Illuminate\Support\Facades\DB::table('winners')->where('eve
                                             <th>Name</th>
                                             <th>Position</th>
                                             <th>Event</th>
-
                                             <th>Group</th>
                                             <th>Year</th>
                                             <th>Class</th>
+                                            <th>Delete</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -51,6 +51,7 @@ $winnersListTable = \Illuminate\Support\Facades\DB::table('winners')->where('eve
                                             <td>{{$listItem->group}}</td>
                                             <td>{{$listItem->year}}</td>
                                             <td>{{$listItem->class}}</td>
+                                           <td><a  href="{{url('/del_winner?w_id='.$listItem->id)}}" onclick="return confirm('Do you really want to Delete this?');" class="btn btn-danger btn-sm">Delete </a></td>
 
 
                                         </tr>

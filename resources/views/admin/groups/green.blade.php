@@ -34,6 +34,7 @@ $greenGroup = \Illuminate\Support\Facades\DB::table('greeng')->get();
                                             <th>Name</th>
                                             <th>Year</th>
                                             <th>Class</th>
+                                             <th>Delete</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -42,6 +43,8 @@ $greenGroup = \Illuminate\Support\Facades\DB::table('greeng')->get();
                                             <td>{{$green->name}}</td>
                                             <td>{{$green->year}}</td>
                                             <td>{{$green->class}}</td>
+                                           <td><a  href="{{url('/del_group?g_id='.$green->id)}}" onclick="return confirm('Do you really want to Delete this?');" class="btn btn-danger btn-sm">Delete </a></td>
+
 
                                         </tr>
                                     @endforeach

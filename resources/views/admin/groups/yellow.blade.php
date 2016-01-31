@@ -34,6 +34,7 @@ $yellowGroup = \Illuminate\Support\Facades\DB::table('yellowg')->get();
                                             <th>Name</th>
                                             <th>Year</th>
                                             <th>Class</th>
+                                            <th>Delete</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -42,6 +43,7 @@ $yellowGroup = \Illuminate\Support\Facades\DB::table('yellowg')->get();
                                             <td>{{$yellow->name}}</td>
                                             <td>{{$yellow->year}}</td>
                                             <td>{{$yellow->class}}</td>
+                                           <td><a  href="{{url('/del_group?y_id='.$yellow->id)}}" onclick="return confirm('Do you really want to Delete this?');" class="btn btn-danger btn-sm">Delete </a></td>
 
                                         </tr>
                                     @endforeach
