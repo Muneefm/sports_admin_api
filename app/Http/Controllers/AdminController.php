@@ -326,7 +326,8 @@ function excelParse()
     if (Input::hasFile('exl')) {
         $exlFile = Input::file('exl');
         $result = Excel::load($exlFile)->get();
-        //  dd($result->toArray());
+          //dd($result[0]->toArray());
+
          if ($class != null && $year != null && $result != null) {
 
          foreach ($result as $res) {
