@@ -74,4 +74,5 @@ Route::controllers([
 
 // api requests
 
-Route:get('/api/score','APIController@getScore');
+Route::get('/api/score','APIController@getScore');
+Route::get('/api/group','APIController@getGroupMenbers');
