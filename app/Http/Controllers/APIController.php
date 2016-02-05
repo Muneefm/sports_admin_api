@@ -1,4 +1,5 @@
 <?php namespace App\Http\Controllers;
+use App\Blueg;
 use App\User;
 use App\Score;
 use Auth;
@@ -33,6 +34,9 @@ class APIController extends Controller
             if($grpId == 'b'){
                 $status = 'success';
                 $group = DB::table('blueg')->get();
+           // $groupd = Blueg::all();
+             //   $group = $groupd->toArray();
+                //$group = $group->toArray();
             }else if($grpId == 'g'){
                 $status = 'success';
                 $group = DB::table('greeng')->get();
@@ -56,7 +60,7 @@ class APIController extends Controller
                 if($page<=$pageCount){
                     $strt = ($page-1)*$countPerPage;
                     $end = $page*10;
-                    $group  = array_slice($group,$strt , $end);
+                    $group  = array_slice($group,$strt , $countPerPage);
                     //dd($grpArray);
                 }else{
                     return Response::json([
@@ -67,10 +71,8 @@ class APIController extends Controller
                 $page=1;
             }
             return Response::json([
-                'result'=>$group,'status'=>$status,'total_pages'=>$pageCount,'current_page'=>$page
+                'result'=>$this->transformCollection($group),'status'=>$status,'total_pages'=>$pageCount,'current_page'=>$page
             ]);
-
-
             }
     }
 
@@ -80,10 +82,19 @@ class APIController extends Controller
            'result'=>$eventTable
         ]);
 
+    }
 
+    private function transformCollection($group){
 
+        return array_map([$this, 'transform'],$group);
+    }
 
-
+    function transform($group){
+        return [
+            'name'=>$group->name,
+            'year'=>$group->year,
+            'cls'=>$group->class
+        ];
     }
 
 
