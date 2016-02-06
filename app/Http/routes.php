@@ -76,3 +76,4 @@ Route::controllers([
 
 Route::get('/api/score','APIController@getScore');
 Route::get('/api/group','APIController@getGroupMenbers');
+Route::get('/api/group_search','APIController@searchGroup');
