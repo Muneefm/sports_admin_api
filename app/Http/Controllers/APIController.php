@@ -242,4 +242,31 @@ class APIController extends Controller
 
 
 
+    function imageGallery(){
+
+        $imageDb = DB::table('images')->get();
+        return Response::json([
+           'result'=>$this->transformCollectionImage($imageDb),'status'=>'success'
+        ]);
+
+
+
+    }
+
+    private function transformCollectionImage($imageDb){
+
+        return array_map([$this, 'transformImage'],$imageDb);
+    }
+
+    function transformImage($imageDb){
+        return [
+            'name'=>$imageDb->name,
+            'ext'=>$imageDb->ext,
+
+        ];
+    }
+
+
+
+
 }
