@@ -78,3 +78,4 @@ Route::get('/api/score','APIController@getScore');
 Route::get('/api/group','APIController@getGroupMenbers');
 Route::get('/api/group_search','APIController@searchGroup');
 Route::get('/api/images','APIController@imageGallery');
+Route::get('/api/events','APIController@getEvents');

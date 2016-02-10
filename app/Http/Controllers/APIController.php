@@ -2,6 +2,7 @@
 use App\Blueg;
 use App\User;
 use App\Score;
+use App\Winners;
 use Auth;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
@@ -267,6 +268,129 @@ class APIController extends Controller
     }
 
 
+
+    function getEvents(){
+        $evTypeIGS = Input::get('evid');
+        $evTypeSp = Input::get('evsp');
+
+
+
+    if($evTypeIGS!=null){
+        $winners = DB::table('winners')->get();
+        if($evTypeIGS=='i'){
+            $mData = DB::table('eventname')->where('type','i')->where('specialtype','n')->get();
+            //dd($mData);
+        }elseif($evTypeIGS=='g'){
+
+        }elseif($evTypeIGS=='s'){
+
+        }
+
+        return Response::json([
+           'status'=>'success','result'=>$this->transformCollectionEvent($mData,$winners)
+        ]);
+    }
+
+
+    }
+
+
+    private function transformCollectionEvent($mData,$winners){
+        $win =null;
+        $pos1 =null;
+        $pos2 = null;
+        $pos3 = null;
+        //dd($winners);
+      /*  if($winners!=null){
+            foreach($mData as $dataEv){
+                foreach($winners as $winner){
+                    if(($dataEv->code)==($winner->event)){
+                        if($winner->pos=='1'){
+                            $pos1 = $winner;
+                        }else if($winner->pos=='2'){
+                            $pos2 = $winner;
+                        }else if($winner->pos=='3'){
+                            $pos3 = $winner;
+                        }
+                        // $win = $winner;
+                    }
+                }
+            }
+
+        }*/
+
+        return array_map([$this, 'transformEvent'],$mData);//,$pos1,$pos2,$pos3);
+    }
+
+    function transformEvent($mData){
+        $pos1 =new \stdClass();//null;//array('name'=>null,'pos'=>null,'event'=>null,'group'=>null,'class'=>null,'year'=>null);
+        $pos1->name=null;
+        $pos1->pos=null;
+        $pos1->event=null;
+        $pos1->group=null;
+        $pos1->class=null;
+        $pos1->year=null;
+
+        $pos2 =new \stdClass();//null;//array('name'=>null,'pos'=>null,'event'=>null,'group'=>null,'class'=>null,'year'=>null);
+        $pos2->name=null;
+        $pos2->pos=null;
+        $pos2->event=null;
+        $pos2->group=null;
+        $pos2->class=null;
+        $pos2->year=null;
+
+
+        $pos3 =new \stdClass();//null;//array('name'=>null,'pos'=>null,'event'=>null,'group'=>null,'class'=>null,'year'=>null);
+        $pos3->name=null;
+        $pos3->pos=null;
+        $pos3->event=null;
+        $pos3->group=null;
+        $pos3->class=null;
+        $pos3->year=null;
+      // dd($pos1->name);
+
+        $winners = DB::table('winners')->get();
+
+        foreach($winners as $winner){
+            if(($mData->code)==($winner->event)){
+                if($winner->pos=='1'){
+                    $pos1 = $winner;
+                }else if($winner->pos=='2'){
+                    $pos2 = $winner;
+                }else if($winner->pos=='3'){
+                    $pos3 = $winner;
+                }
+                // $win = $winner;
+            }
+        }
+  //dd($pos1);
+          return [
+            'name'=>$mData->name,
+            'code'=>$mData->code,
+            'type'=>$mData->type,
+            'specialtype'=>$mData->specialtype,
+            'winnerone'=>(['name'=>$pos1->name,'pos'=>$pos1->pos,'event'=>$pos1->event,'group'=>$pos1->group,'cls'=>$pos1->class,'year'=>$pos1->year]),
+            'winnertwo'=>(['name'=>$pos2->name,'pos'=>$pos2->pos,'event'=>$pos2->event,'group'=>$pos2->group,'cls'=>$pos2->class,'year'=>$pos2->year]),
+            'winnerthree'=>(['name'=>$pos3->name,'pos'=>$pos3->pos,'event'=>$pos3->event,'group'=>$pos3->group,'cls'=>$pos3->class,'year'=>$pos3->year])
+        ];
+    }
+
+
+  /*  private function transformCollectionWinner($win){
+        return array_map([$this, 'transformWinner'],$win);
+    }
+
+    function transformWinner($win){
+        return [
+            'name'=>$win->name,
+            'pos'=>$win->pos,
+            'event'=>$win->event,
+            'group'=>$win->group,
+            'cls'=>$win->class,
+            'year'=>$win->year
+        ];
+    }
+*/
 
 
 }
