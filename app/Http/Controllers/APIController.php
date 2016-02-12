@@ -281,9 +281,12 @@ class APIController extends Controller
             $mData = DB::table('eventname')->where('type','i')->where('specialtype','n')->get();
             //dd($mData);
         }elseif($evTypeIGS=='g'){
-
+            $mData = DB::table('eventname')->where('type','g')->where('specialtype','n')->get();
         }elseif($evTypeIGS=='s'){
-
+            $mData = DB::table('eventname')->where('specialtype','sp')->get();
+            dd($mData);
+        }else{
+            //$mData=
         }
 
         return Response::json([
@@ -297,9 +300,7 @@ class APIController extends Controller
 
     private function transformCollectionEvent($mData,$winners){
         $win =null;
-        $pos1 =null;
-        $pos2 = null;
-        $pos3 = null;
+
         //dd($winners);
       /*  if($winners!=null){
             foreach($mData as $dataEv){
@@ -323,6 +324,7 @@ class APIController extends Controller
     }
 
     function transformEvent($mData){
+        $overBool = 0;
         $pos1 =new \stdClass();//null;//array('name'=>null,'pos'=>null,'event'=>null,'group'=>null,'class'=>null,'year'=>null);
         $pos1->name=null;
         $pos1->pos=null;
@@ -353,6 +355,7 @@ class APIController extends Controller
 
         foreach($winners as $winner){
             if(($mData->code)==($winner->event)){
+                $overBool =1;
                 if($winner->pos=='1'){
                     $pos1 = $winner;
                 }else if($winner->pos=='2'){
@@ -368,6 +371,7 @@ class APIController extends Controller
             'name'=>$mData->name,
             'code'=>$mData->code,
             'type'=>$mData->type,
+              'over'=>$overBool,
             'specialtype'=>$mData->specialtype,
             'winnerone'=>(['name'=>$pos1->name,'pos'=>$pos1->pos,'event'=>$pos1->event,'group'=>$pos1->group,'cls'=>$pos1->class,'year'=>$pos1->year]),
             'winnertwo'=>(['name'=>$pos2->name,'pos'=>$pos2->pos,'event'=>$pos2->event,'group'=>$pos2->group,'cls'=>$pos2->class,'year'=>$pos2->year]),
