@@ -52,6 +52,10 @@ Route::get('/gallery','AdminController@openGallery');
 Route::get('/parse_excel','AdminController@excelView');
 Route::post('/parse_excel','AdminController@excelParse');
 
+//feeds
+Route::get('/feed_get','AdminController@getFeeds');
+
+
 
 
 //Route::get('home', 'HomeController@index');

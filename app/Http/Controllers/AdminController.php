@@ -374,4 +374,23 @@ echo 'Failed ';
 }
 
 
+    function getFeeds(){
+        if (Auth::check()) {
+            return view('admin.Feeds');
+        }else{
+            return redirect('login');
+        }
+    }
+
+
+    function deleteFeed(){
+        if (Auth::check()) {
+            $id = Input::get('fd_id');
+        }else{
+            return redirect('login');
+        }
+    }
+
+
+
 }
