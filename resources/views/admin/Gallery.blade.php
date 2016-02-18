@@ -25,6 +25,8 @@
             <div class="col-lg-3 col-md-4 col-xs-6 thumb">
                 <a class="thumbnail" href="#">
                     <img class="img-responsive" src="{{'uploads/'.$image->name}}" alt="">
+                    <td><a  href="{{url('/del_image?img_id='.$image->id)}}" onclick="return confirm('Do you really want to Delete this?');" class="btn btn-danger btn-sm">Delete </a></td>
+
                 </a>
             </div>
             @endforeach

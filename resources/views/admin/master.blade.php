@@ -66,7 +66,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Sports</a>
+                <a class="navbar-brand" href="{{url('home')}}">Sports</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -432,6 +432,10 @@
                          </li>
                           <li>
                           <a href="{{url('/parse_excel')}}"><i class="fa fa-dashboard fa-fw"></i> Group Excel Parse</a>
+                          </li>
+
+                          <li>
+                          <a href="{{url('/feed_get')}}"><i class="fa fa-dashboard fa-fw"></i> Feeds</a>
                           </li>
                     </ul>
                 </div>

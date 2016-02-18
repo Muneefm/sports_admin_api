@@ -71,5 +71,29 @@ class DeleteController extends Controller
     }
 
 
+    function deleteFeed(){
+        if (Auth::check()) {
+            $id = Input::get('fd_id');
+            if('fd_id'!=null){
+            DB::table('feeds')->where('id',$id)->delete();
+                return Redirect('feed_get');
+            }
+        }else{
+            return redirect('login');
+        }
+    }
+
+    function deleteImage(){
+        if (Auth::check()) {
+            $id = Input::get('img_id');
+            if('img_id'!=null){
+                DB::table('images')->where('id',$id)->delete();
+                return Redirect('gallery');
+            }
+        }else{
+            return redirect('login');
+        }
+    }
+
 
 }

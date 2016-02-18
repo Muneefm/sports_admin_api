@@ -54,6 +54,8 @@ Route::post('/parse_excel','AdminController@excelParse');
 
 //feeds
 Route::get('/feed_get','AdminController@getFeeds');
+Route::post('/add_feed','AdminController@getFeeds');
+
 
 
 
@@ -64,6 +66,10 @@ Route::get('/feed_get','AdminController@getFeeds');
 Route::get('/del_group','DeleteController@deleteFromGroup');
 Route::get('/del_eventlist','DeleteController@deleteFromEvent');
 Route::get('/del_winner','DeleteController@deleteFromWinners');
+Route::get('/del_feed','DeleteController@deleteFeed');
+Route::get('/del_image','DeleteController@deleteImage');
+
+
 
 
 Route::controllers([
@@ -83,3 +89,4 @@ Route::get('/api/group','APIController@getGroupMenbers');
 Route::get('/api/group_search','APIController@searchGroup');
 Route::get('/api/images','APIController@imageGallery');
 Route::get('/api/events','APIController@getEvents');
+Route::get('/api/feeds','APIController@getFeeds');

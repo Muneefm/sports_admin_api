@@ -62,7 +62,7 @@ $feedsTable = \Illuminate\Support\Facades\DB::table('feeds')->get();
                             <!-- /.table-responsive -->
                             <div class="well">
                                 <h4>Enter members</h4>
-                                <form method="POST" action="{{url('/add_feed')}}">
+                                <form method="POST" action="{{url('/add_feed')}}" enctype="multipart/form-data">
                                 <div style="width: 250px">
                                         <div class="form-group">
                                             <label>Main String</label>
@@ -76,7 +76,7 @@ $feedsTable = \Illuminate\Support\Facades\DB::table('feeds')->get();
                                         <div style="margin-top: 20px" class="form-group">
 
                                             <label>Sub String</label>
-                                            <input class="form-control" placeholder="Sub String " name="substring" >
+                                            <input class="form-control" placeholder="Sub String " name="sstring" >
                                         </div>
                                         <div style="margin-top: 20px" class="form-group">
                                             <label> Select image to upload:</label>
@@ -85,7 +85,7 @@ $feedsTable = \Illuminate\Support\Facades\DB::table('feeds')->get();
 
 
                                         </div>
-                            <button style="margin-top: 20px" type='submit' class="btn btn-primary btn-lg btn-block">Add Feed</button>
+                            <input style="margin-top: 20px" type='submit' class="btn btn-primary btn-lg btn-block">
 
                                 </div>
                                 </form>

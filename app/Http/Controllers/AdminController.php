@@ -2,6 +2,7 @@
 use App\Blueg;
 use App\Event;
 use App\Eventname;
+use App\Feeds;
 use App\Greeng;
 use App\Images;
 use App\Redg;
@@ -376,6 +377,40 @@ echo 'Failed ';
 
     function getFeeds(){
         if (Auth::check()) {
+
+            $mainString = Input::get('mstring');
+            $subString = Input::get('sstring');
+            $author = Input::get('author');
+            //$mainString = Input::get('mstring');
+            $filename ="";
+            $ext ="";
+            if($subString == null ){
+                $subString ="";
+            }
+            if($author == null){
+                $author = "";
+            }
+
+            if($mainString!=null){
+                if(Input::hasFile('img')){
+                    $imageFile = Input::file('img');
+                    $filename = time().'.'.$imageFile->getClientOriginalExtension();
+                    $imageFile->move('feedimages',$filename);
+                    $ext = $imageFile->getClientOriginalExtension();
+                }else{
+
+                }
+                $feedModel = new Feeds();
+                $feedModel->mainstring = $mainString;
+                $feedModel->substring = $subString;
+                $feedModel->author = $author;
+                $feedModel->image = $filename;
+                $feedModel->imagepath = 'feedimages';
+                $feedModel->ext = $ext;
+                $feedModel->save();
+
+
+            }
             return view('admin.Feeds');
         }else{
             return redirect('login');
@@ -383,13 +418,6 @@ echo 'Failed ';
     }
 
 
-    function deleteFeed(){
-        if (Auth::check()) {
-            $id = Input::get('fd_id');
-        }else{
-            return redirect('login');
-        }
-    }
 
 
 

@@ -246,10 +246,37 @@ class APIController extends Controller
     function imageGallery(){
 
         $imageDb = DB::table('images')->get();
-        return Response::json([
-           'result'=>$this->transformCollectionImage($imageDb),'status'=>'success'
-        ]);
+        $page = Input::get('page');
+        if($imageDb!=null){
+            if($page==null){
+                $page=1;
+            }
+            $countPerPage = 10;
+            $grpSize = sizeof($imageDb);
+            $pageCount = intval($grpSize/$countPerPage);
+            if(($grpSize%$countPerPage)!=0){
+                $pageCount++;
+            }
+            if($page!=null){
+                if($page<=$pageCount){
+                    $strt = ($page-1)*$countPerPage;
+                    $end = $page*10;
+                    $imageDb  = array_slice($imageDb,$strt , $countPerPage);
+                    //dd($grpArray);
+                }else{
+                    return Response::json([
+                        'status'=>'fail',
+                    ]);
+                }
+            }else{
+                $page=1;
+            }
 
+
+        return Response::json([
+           'result'=>$this->transformCollectionImage($imageDb),'status'=>'success','total_page'=>$pageCount,'current_page'=>$page
+        ]);
+        }
 
 
     }
@@ -366,7 +393,6 @@ class APIController extends Controller
                 // $win = $winner;
             }
         }
-  //dd($pos1);
           return [
             'name'=>$mData->name,
             'code'=>$mData->code,
@@ -380,21 +406,57 @@ class APIController extends Controller
     }
 
 
-  /*  private function transformCollectionWinner($win){
-        return array_map([$this, 'transformWinner'],$win);
+ function getFeeds(){
+     $feedsTable = DB::table('feeds')->get();
+     $page = Input::get('page');
+     if($page==null){
+         $page=1;
+     }
+     if($feedsTable!=null){
+         $countPerPage = 10;
+         $feedSize = sizeof($feedsTable);
+         $pageCount = intval($feedSize/$countPerPage);
+         if(($feedSize%$countPerPage)!=0){
+             $pageCount++;
+         }
+
+         if($page!=null){
+             if($page<=$pageCount){
+                 $strt = ($page-1)*$countPerPage;
+                 $end = $page*10;
+                 $group  = array_slice($feedsTable,$strt , $countPerPage);
+                 //dd($grpArray);
+             }else{
+                 return Response::json([
+                     'status'=>'fail',
+                 ]);
+             }
+         }else{
+             $page=1;
+         }
+
+
+
+         return Response::json([
+            'status'=>'success','result'=>$this->transformFeeds($feedsTable),'current_page'=>$page,'total_page'=>$pageCount
+         ]);
+     }
+ }
+
+    private function transformFeeds($feed){
+
+        return array_map([$this, 'transformfeed'],$feed);
     }
 
-    function transformWinner($win){
+    function transformfeed($feed){
         return [
-            'name'=>$win->name,
-            'pos'=>$win->pos,
-            'event'=>$win->event,
-            'group'=>$win->group,
-            'cls'=>$win->class,
-            'year'=>$win->year
+            'mainstring'=>$feed->mainstring,
+            'substring'=>$feed->substring,
+            'author'=>$feed->author,
+            'image'=>$feed->image,
+            'ext'=>$feed->ext
         ];
     }
-*/
 
 
 }
