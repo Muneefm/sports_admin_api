@@ -8,8 +8,6 @@ use App\Images;
 use App\Redg;
 use App\Winners;
 use App\Yellowg;
-
-
 use App\User;
 use App\Score;
 use Auth;
@@ -41,6 +39,37 @@ class AdminController extends Controller
             $model->specialtype = "sp";
             $model->save();
         }*/
+
+
+    }
+
+    function newEvent(){
+      //  DB::table('eventname')->where('code', 'e34')->update(['name'=>'Badminton Boys (Doubles)']);
+        //DB::table('eventname')->where('code', 'e35')->update(['name'=>'Badminton Girls (Doubles)']);
+
+        $newevent = new Eventname();
+        $newevent->name = "Badminton Boys (Singles)";
+        $newevent->code = "e40";
+        $newevent->type = "g";
+        $newevent->specialtype = "n";
+        $newevent->save();
+
+        $newevent = new Eventname();
+        $newevent->name = "Badminton Girls (Singles)";
+        $newevent->code = "e41";
+        $newevent->type = "g";
+        $newevent->specialtype = "n";
+        $newevent->save();
+
+
+
+
+
+
+
+        //$newevent->name = "Badminton Boys (Singles)";
+
+
 
 
     }

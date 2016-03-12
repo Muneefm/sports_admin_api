@@ -246,6 +246,7 @@ class APIController extends Controller
     function imageGallery(){
 
         $imageDb = DB::table('images')->get();
+        $imageDb = array_reverse($imageDb);
         $page = Input::get('page');
         if($imageDb!=null){
             if($page==null){

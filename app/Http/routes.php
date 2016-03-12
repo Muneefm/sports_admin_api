@@ -69,7 +69,8 @@ Route::get('/del_winner','DeleteController@deleteFromWinners');
 Route::get('/del_feed','DeleteController@deleteFeed');
 Route::get('/del_image','DeleteController@deleteImage');
 
-
+//update event
+Route::get('/update_event','AdminController@newEvent');
 
 
 Route::controllers([
